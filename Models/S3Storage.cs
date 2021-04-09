@@ -1,11 +1,6 @@
-﻿using Amazon;
-using Amazon.S3;
-using Amazon.S3.Model;
+﻿using Amazon.S3;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebCameraRecorder.Models
@@ -17,32 +12,16 @@ namespace WebCameraRecorder.Models
 
         public S3Storage(IConfiguration configuration)
         {
-            client = new AmazonS3Client(
-                configuration["aws:AccessKeyId"],
-                configuration["aws:SecretAccessKey"],
-                RegionEndpoint.USWest2);
+
         }
         public string GetUrl(string fileName)
         {
-            GetPreSignedUrlRequest request = new GetPreSignedUrlRequest
-            {
-                BucketName = bucketName,
-                Key = fileName,
-                Expires = DateTime.Now.AddMinutes(5)
-            };
-            return client.GetPreSignedURL(request);
+            return "fjalskfjaslkfjkalsfj";
         }
 
         public async Task PostAsync(Stream stream, string fileName)
         {
-            var putRequest = new PutObjectRequest
-            {
-                BucketName = bucketName,
-                InputStream = stream,
-                Key = fileName
-            };
 
-            await client.PutObjectAsync(putRequest);
         }
     }
 }
